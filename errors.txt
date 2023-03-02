@@ -1,0 +1,5 @@
+Potential arithmetic overflow in operation '+ b + 1'b1;' at line 37
+Multi-driven bus/register 'c' at line 1
+Multi-driven bus/register 'e' at line 1
+Uninitialized register '' at line 8
+Uninitialized register '' at line 20

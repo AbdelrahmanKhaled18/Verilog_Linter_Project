@@ -1,0 +1,40 @@
+module test_case (
+  input wire a,
+  input wire b,
+  output wire c
+);
+
+  // unreachable FSM state
+  reg [2:0] state;
+  always @(*) begin
+    case (state)
+      3'b000: state = 3'b001;
+      3'b001: state = 3'b010;
+      3'b010: state = 3'b100;
+      3'b100: state = 3'b000;
+      3'b111: state = 3'b111; // unreachable state
+    endcase
+  end
+
+  // uninitialized register
+  reg d;
+
+  // multi-driven bus/register
+  wire e;
+  assign e = a | b;
+  assign e = a & b;
+
+  // non-full/parallel case
+  always @(*) begin
+    case (e)
+      1'b0: c = 1'b0;
+      1'b1: c = 1'b1;
+    endcase
+  end
+
+  // arithmetic overflow
+  always @(*) begin
+    c = a + b + 1'b1;
+  end
+
+endmodule
